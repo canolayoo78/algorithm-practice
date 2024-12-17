@@ -1,0 +1,5 @@
+N = int(input())
+S = map(int, input().split())
+T, P = map(int, input().split())
+print(sum(map(lambda x: x//T + (1 if x%T != 0 else 0), S)))
+print(N//P, N%P)
