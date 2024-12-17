@@ -1,20 +1,7 @@
-N = int(input())
-numbers = list(map(int, input().split()))
-
-
-def is_prime(number):
-    if number <= 1:
-        return False
-    for i in range(2, number):
-        if number % i == 0:
-            return False
-    return True
-
-
-sum = 0
-
-for number in numbers:
-    if is_prime(number):
-        sum += 1
-
-print(sum)
+input()
+l=list(map(int,input().split()))
+if 1 in l: l.remove(1)
+for i in l[::]:
+    for j in range(2,int(i**0.5)+1):
+        if i%j==0: l.remove(i);break
+print(len(l))
