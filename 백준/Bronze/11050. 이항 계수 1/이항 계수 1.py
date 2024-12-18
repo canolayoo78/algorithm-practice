@@ -1,15 +1,11 @@
 N, K = map(int, input().split())
 
+numerator = 1
+for i in range(N, N-K, -1):
+    numerator *= i
 
-def factorial(n):
-    result = 1
-    for i in range(1, n + 1):
-        result *= i
-    return result
+denominator = 1
+for i in range(K,0,-1):
+    denominator *= i
 
-
-def binomial_coefficient(n, k):
-    return factorial(n) // (factorial(k) * factorial(n - k))
-
-
-print(binomial_coefficient(N, K))
+print(numerator // denominator)
