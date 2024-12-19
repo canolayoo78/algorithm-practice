@@ -1,7 +1,11 @@
 import sys
 
 N = int(sys.stdin.readline())
-numbers = [int(sys.stdin.readline()) for _ in range(N)]
-numbers.sort()
-for i in range(N):
-    print(numbers[i])
+exist = [None] * 2000001
+
+for _ in range(N):
+    exist[int(sys.stdin.readline()) + 1000000] = 1
+
+for i in range(len(exist)):
+    if exist[i] == 1:
+        print(i - 1000000)
