@@ -1,9 +1,5 @@
-N = int(input())
-words = []
-for i in range(N):
-    words.append(input())
-
-words = sorted(set(words), key=lambda x: (len(x), x))
-
-for i in range(len(words)):
-    print(words[i])
+import sys
+N = int(sys.stdin.readline())
+words = list(set([sys.stdin.readline().strip() for _ in range(N)]))
+words.sort()
+print('\n'.join(sorted(words, key=len)))
