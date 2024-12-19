@@ -1,13 +1,15 @@
 import sys
 
-input = sys.stdin.readline
+input = sys.stdin.readlines
 print = sys.stdout.write
 
-N = int(input())
+points = input()[1:]
 
-points = [tuple(map(int, input().split())) for _ in range(N)]
 
-points.sort()
+def condition(line):
+    x, y = map(int, line.split())
+    return x + y / 1e6
 
-for x, y in points:
-    print(str(x) + " " + str(y) + "\n")
+
+points.sort(key=condition)
+print("".join(points))
