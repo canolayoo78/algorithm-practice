@@ -2,11 +2,9 @@ import sys
 
 input = sys.stdin.readline
 
-N = int(input())
-z_N = set(input().split())
+N = input()
+nums = input().split()
+nums_dict = {i: "1" for i in nums}
 
-M = int(input())
-z_M = input().split()
-
-for key in z_M:
-    print(int(key in z_N))
+M = input()
+print('\n'.join([nums_dict.get(v, '0') for v in input().rstrip().split(' ')]))
