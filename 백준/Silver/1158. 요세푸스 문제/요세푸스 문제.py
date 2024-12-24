@@ -1,17 +1,18 @@
 import sys
-from collections import deque
 
 input = sys.stdin.readline
 
 
 def find_josephus_permutation(N, K):
-    queue = deque(range(1, N + 1))
+    arr = [i for i in range(1, N + 1)]
     josephus_permutation = []
+    delete_index = 0
 
-    while len(queue) > 0:
-        for _ in range(K - 1):
-            queue.append(queue.popleft())
-        josephus_permutation.append(queue.popleft())
+    for _ in range(N):
+        delete_index += K - 1
+        if delete_index >= len(arr):
+            delete_index %= len(arr)
+        josephus_permutation.append(arr.pop(delete_index))
 
     return str(josephus_permutation).replace("[", "<").replace("]", ">")
 
