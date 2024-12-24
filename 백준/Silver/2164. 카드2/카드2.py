@@ -1,16 +1,13 @@
+import math
 import sys
-from collections import deque
 
 input = sys.stdin.readline
 
 
 def find_last_card(N):
-    queue = deque(range(1, N + 1))
-
-    while len(queue) > 1:
-        queue.popleft()
-        queue.append(queue.popleft())
-    return queue[0]
+    josephus = 2 ** math.floor(math.log2(N))
+    last_card = 2 * (N - josephus)
+    return last_card if last_card != 0 else N
 
 
 N = int(input())
