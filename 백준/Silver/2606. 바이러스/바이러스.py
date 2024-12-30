@@ -10,21 +10,18 @@ def solution():
     graph = [[] for i in range(N + 1)]
     visited = [0] * (N + 1)
 
-    for i in range(V):
+    for _ in range(V):
         node1, node2 = map(int, input().split())
         graph[node1] += [node2]
         graph[node2] += [node1]
 
-    visited[1] = 1
-    queue = deque([1])
+    def dfs(start):
+        visited[start] = 1
+        for next_node in graph[start]:
+            if not visited[next_node]:
+                dfs(next_node)
 
-    while queue:
-        start_node = queue.pop()
-        for next_node in graph[start_node]:
-            if visited[next_node] == 0:
-                queue.append(next_node)
-                visited[next_node] = 1
-
+    dfs(1)
     print(sum(visited) - 1)
 
 
