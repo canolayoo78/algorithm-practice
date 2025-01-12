@@ -23,10 +23,6 @@ def dfs(start):
             dfs(next_node)
 
 
-def solution():
+if __name__ == "__main__":
     dfs(1)
     print("\n".join(str(answer) for answer in ans[2:]))
-
-
-if __name__ == "__main__":
-    solution()
