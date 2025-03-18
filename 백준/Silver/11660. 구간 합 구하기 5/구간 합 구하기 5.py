@@ -12,11 +12,10 @@ def solution():
     for i in range(1, N + 1):
         for j in range(1, N + 1):
             table[i][j] = table[i][j - 1] + table[i - 1][j] - table[i - 1][j - 1] + table[i][j]
-            
 
     for _ in range(M):
-        sx, sy, ex, ey = map(int, input().split())
-        print(table[ex][ey] - table[sx - 1][ey] - table[ex][sy - 1] + table[sx - 1][sy - 1])
+        x1, y1, x2, y2 = map(int, input().split())
+        print(table[x2][y2] - table[x1 - 1][y2] - table[x2][y1 - 1] + table[x1 - 1][y1 - 1])
 
 
 if __name__ == "__main__":
