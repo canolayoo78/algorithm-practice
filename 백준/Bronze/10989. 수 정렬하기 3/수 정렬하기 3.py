@@ -12,8 +12,8 @@ def solution():
     for _ in range(N):
         count[int(input())] += 1
 
-    for i in range(MAX):
-        for _ in range(count[i]):
+    for i, a in enumerate(count):
+        for _ in range(a):
             print(str(i) + "\n")
 
 
