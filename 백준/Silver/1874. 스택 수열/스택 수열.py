@@ -2,7 +2,7 @@ import sys
 from collections import deque
 
 input = sys.stdin.readline
-# print = sys.stdout.write
+print = sys.stdout.write
 
 
 def solution():
@@ -11,6 +11,7 @@ def solution():
     queue = deque()
     index = 0
     ans = []
+
     for i in range(1, N + 1):
         queue.append(i)
         ans.append("+")
