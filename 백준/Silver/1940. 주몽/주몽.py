@@ -1,5 +1,4 @@
 import sys
-from collections import deque
 
 input = sys.stdin.readline
 print = sys.stdout.write
@@ -25,6 +24,7 @@ def solution():
             one += 1
         else:
             two -= 1
+
     print(str(ans))
 
 
