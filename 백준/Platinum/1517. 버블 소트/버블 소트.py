@@ -1,11 +1,13 @@
 import sys
 
 input = sys.stdin.readline
-answer = 0
 
+answer = 0
+N = int(input())
+tmp = [0] * N
+numbers = list(map(int, input().split()))
 
 def merge_sort(arr):
-
     def sort(left, right):
         if right - left < 2:
             return
@@ -15,34 +17,35 @@ def merge_sort(arr):
         merge(left, mid, right)
 
     def merge(left, mid, right):
-        global answer
-        sorted_arr = []
-        left_index, right_index = left, mid
+        global answer, tmp
+        for i in range(left, right):
+            tmp[i] = arr[i]
+        k, left_index, right_index = left, left, mid
         while left_index < mid and right_index < right:
-            if arr[left_index] <= arr[right_index]:
-                sorted_arr.append(arr[left_index])
+            if tmp[left_index] <= tmp[right_index]:
+                arr[k] = tmp[left_index]
                 left_index += 1
+                k += 1
             else:
-                sorted_arr.append(arr[right_index])
-                answer += mid - left_index
+                arr[k] = tmp[right_index]
                 right_index += 1
+                k += 1
+                answer += mid - left_index
 
         while left_index < mid:
-            sorted_arr.append(arr[left_index])
+            arr[k] = tmp[left_index]
             left_index += 1
+            k += 1
 
         while right_index < right:
-            sorted_arr.append(arr[right_index])
+            arr[k] = tmp[right_index]
             right_index += 1
+            k += 1
 
-        for i in range(left, right):
-            arr[i] = sorted_arr[i - left]
 
-    return sort(0, len(arr))
+    sort(0, len(arr))
 
 
 if __name__ == "__main__":
-    N = int(input())
-    numbers = list(map(int, input().split()))
     merge_sort(numbers)
     print(answer)
