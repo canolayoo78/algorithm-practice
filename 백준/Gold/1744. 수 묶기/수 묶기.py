@@ -9,12 +9,12 @@ input = sys.stdin.readline
 
 def solution():
     N = int(input())
-    nums = [int(input()) for _ in range(N)]
     negative_nums = []
     positive_nums = []
     ans = 0
 
-    for num in nums:
+    for _ in range(N):
+        num = int(input())
         if num > 1:
             positive_nums.append(num)
         elif num <= 0:
