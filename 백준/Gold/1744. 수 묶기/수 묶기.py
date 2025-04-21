@@ -10,41 +10,32 @@ input = sys.stdin.readline
 def solution():
     N = int(input())
     nums = [int(input()) for _ in range(N)]
-    negative_heap = []
-    positive_heap = []
-
+    negative_nums = []
+    positive_nums = []
     ans = 0
 
     for num in nums:
         if num > 1:
-            heapq.heappush(positive_heap, -num)
+            positive_nums.append(num)
         elif num <= 0:
-            heapq.heappush(negative_heap, num)
+            negative_nums.append(num)
         else:
             ans += 1
 
-    while positive_heap:
-        if len(positive_heap) == 1:
-            ans += -heapq.heappop(positive_heap)
+    negative_nums.sort()
+    positive_nums.sort(reverse=True)
 
+    for i in range(0, len(positive_nums), 2):
+        if i + 1 >= len(positive_nums):
+            ans += positive_nums[i]
         else:
-            max1 = -heapq.heappop(positive_heap)
-            max2 = -heapq.heappop(positive_heap)
+            ans += positive_nums[i] * positive_nums[i + 1]
 
-            multiple = max1 * max2
-            ans += multiple
-
-    while negative_heap:
-        if len(negative_heap) == 1:
-            ans += heapq.heappop(negative_heap)
-
+    for i in range(0, len(negative_nums), 2):
+        if i + 1 >= len(negative_nums):
+            ans += negative_nums[i]
         else:
-            max1 = heapq.heappop(negative_heap)
-            max2 = heapq.heappop(negative_heap)
-
-            multiple = max1 * max2
-            ans += multiple
-
+            ans += negative_nums[i] * negative_nums[i + 1]
     print(ans)
 
 
