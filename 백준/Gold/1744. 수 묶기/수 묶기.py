@@ -1,10 +1,8 @@
-import heapq
 import sys
 
-sys.setrecursionlimit(10000)
 
 input = sys.stdin.readline
-# print = sys.stdout.write
+print = sys.stdout.write
 
 
 def solution():
@@ -23,9 +21,6 @@ def solution():
         else:
             ans += 1
 
-    negative_nums.sort()
-    positive_nums.sort(reverse=True)
-
     def make_bundle(nums):
         nonlocal ans
         for i in range(0, len(nums), 2):
@@ -34,9 +29,9 @@ def solution():
             else:
                 ans += nums[i] * nums[i + 1]
 
-    make_bundle(negative_nums)
-    make_bundle(positive_nums)
-    print(ans)
+    make_bundle(sorted(negative_nums))
+    make_bundle(sorted(positive_nums, reverse=True))
+    print(str(ans))
 
 
 if __name__ == "__main__":
