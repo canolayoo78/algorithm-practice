@@ -8,6 +8,7 @@ input = sys.stdin.readline
 
 
 def solution():
+
     N = int(input())
     negative_nums = []
     positive_nums = []
@@ -25,17 +26,16 @@ def solution():
     negative_nums.sort()
     positive_nums.sort(reverse=True)
 
-    for i in range(0, len(positive_nums), 2):
-        if i + 1 >= len(positive_nums):
-            ans += positive_nums[i]
-        else:
-            ans += positive_nums[i] * positive_nums[i + 1]
+    def make_bundle(nums):
+        nonlocal ans
+        for i in range(0, len(nums), 2):
+            if i + 1 >= len(nums):
+                ans += nums[i]
+            else:
+                ans += nums[i] * nums[i + 1]
 
-    for i in range(0, len(negative_nums), 2):
-        if i + 1 >= len(negative_nums):
-            ans += negative_nums[i]
-        else:
-            ans += negative_nums[i] * negative_nums[i + 1]
+    make_bundle(negative_nums)
+    make_bundle(positive_nums)
     print(ans)
 
 
