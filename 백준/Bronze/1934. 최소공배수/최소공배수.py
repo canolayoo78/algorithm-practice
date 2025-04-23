@@ -9,16 +9,15 @@ input = sys.stdin.readline
 def solution():
     N, M = map(int, input().split())
 
-    def euclidean(larger, smaller):
-        mod = larger % smaller
-        if mod == 0:
-            return smaller
+    if N > M:
+        larger, smaller = N, M
+    else:
+        larger, smaller = M, N
 
-        else:
-            return euclidean(smaller, mod)
+    while smaller != 0:
+        larger, smaller = smaller, larger % smaller
 
-    gcd = euclidean(N, M)
-    lcm = (N * M) // gcd
+    lcm = (N * M) // larger
     print(lcm)
 
 
