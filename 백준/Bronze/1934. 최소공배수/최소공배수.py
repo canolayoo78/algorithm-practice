@@ -1,27 +1,15 @@
 import sys
-
-sys.setrecursionlimit(10000)
-
 input = sys.stdin.readline
-# print = sys.stdout.write
 
+def gcd(a, b):
+    if a%b == 0:
+        return b
+    return gcd(b, a %b)
 
-def solution():
-    N, M = map(int, input().split())
+def lcd(a, b):
+    return (a*b) // gcd(a, b)
 
-    if N > M:
-        larger, smaller = N, M
-    else:
-        larger, smaller = M, N
-
-    while smaller != 0:
-        larger, smaller = smaller, larger % smaller
-
-    lcm = (N * M) // larger
-    print(lcm)
-
-
-if __name__ == "__main__":
-    T = int(input())
-    for _ in range(T):
-        solution()
+T = int(input())
+for _ in range(T):
+    A, B = map(int, input().split())
+    print(lcd(A, B))
