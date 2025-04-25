@@ -1,17 +1,10 @@
 import sys
 
-# sys.setrecursionlimit(10000)
-
 input = sys.stdin.readline
-# print = sys.stdout.write
+print = sys.stdout.write
 
 
 def solution():
-    N = int(input())
-
-    if N <= 2:
-        return 2
-
     def is_palindrome(x):
         s = str(x)
         return s == s[::-1]
@@ -21,6 +14,11 @@ def solution():
             if x % i == 0:
                 return False
         return True
+
+    N = int(input())
+
+    if N <= 2:
+        return 2
 
     if N % 2 == 0:
         N += 1
@@ -33,4 +31,4 @@ def solution():
 
 
 if __name__ == "__main__":
-    print(solution())
+    print(str(solution()))
