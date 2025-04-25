@@ -12,8 +12,7 @@ def solution():
             a, b = b, a % b
         return a
 
-    for _ in range(gcd(A, B)):
-        print("1")
+    print("1" * gcd(A, B))
 
 
 if __name__ == "__main__":
