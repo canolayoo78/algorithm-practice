@@ -1,6 +1,5 @@
 import sys
 
-
 input = sys.stdin.readline
 print = sys.stdout.write
 
@@ -9,14 +8,12 @@ def solution():
     N = int(input())
     graph = [[] for _ in range(N)]
     visit = [False] * N
-    ingredients = [0] * N
-    lcm = 1
+    ingredients = [1] * N
 
     def gcd(a, b):
-        if b == 0:
-            return a
-        else:
-            return gcd(b, a % b)
+        while b != 0:
+            a, b = b, a % b
+        return a
 
     def dfs(start):
         visit[start] = True
@@ -30,12 +27,11 @@ def solution():
         a, b, p, q = map(int, input().split())
         graph[a].append((b, p, q))
         graph[b].append((a, q, p))
-        lcm *= p * q // gcd(p, q)
+        ingredients[0] *= p * q // gcd(p, q)
 
-    ingredients[0] = lcm
+    ingredients_gcd = ingredients[0]
     dfs(0)
 
-    ingredients_gcd = lcm
     for ingredient in ingredients:
         ingredients_gcd = gcd(ingredients_gcd, ingredient)
 
