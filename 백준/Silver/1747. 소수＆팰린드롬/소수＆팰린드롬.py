@@ -10,7 +10,7 @@ def solution():
         return s == s[::-1]
 
     def is_prime(x):
-        for i in range(3, int(x**0.5) + 1):
+        for i in range(3, int(x**0.5) + 1, 2):
             if x % i == 0:
                 return False
         return True
