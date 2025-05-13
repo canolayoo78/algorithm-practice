@@ -7,6 +7,7 @@ print = sys.stdout.write
 def solution():
     N, M = map(int, input().split())
     set_list = [i for i in range(N + 1)]
+    ans = list()
 
     def find(n):
         if set_list[n] == n:
@@ -27,10 +28,10 @@ def solution():
         if func == 0:
             union(a, b)
         else:
-            if find(a) == find(b):
-                print("yes\n")
-            else:
-                print("no\n")
+            x, y = find(a), find(b)
+            ans.append("YES" if x == y else "NO")
+
+    print("\n".join(ans))
 
 
 if __name__ == "__main__":
