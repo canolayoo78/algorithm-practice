@@ -1,7 +1,7 @@
 import sys
 
 input = sys.stdin.readline
-# print = sys.stdout.write
+print = sys.stdout.write
 
 
 def solution():
@@ -28,9 +28,9 @@ def solution():
             union(a, b)
         else:
             if find(a) == find(b):
-                print("yes")
+                print("yes\n")
             else:
-                print("no")
+                print("no\n")
 
 
 if __name__ == "__main__":
