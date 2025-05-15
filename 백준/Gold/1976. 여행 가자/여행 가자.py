@@ -1,11 +1,9 @@
 import sys
 
 input = sys.stdin.readline
-# print = sys.stdout.write
 
 
 def solution():
-
     N = int(input())
     _ = int(input())
     set_list = [i for i in range(N + 1)]
