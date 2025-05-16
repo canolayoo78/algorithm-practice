@@ -14,11 +14,7 @@ def solution():
         in_degree[b] += 1
 
     ans = []
-    q = deque([])
-
-    for i in range(1, N + 1):
-        if in_degree[i] == 0:
-            q.append(i)
+    q = deque([i for i in range(1, N + 1) if not in_degree[i]])
 
     while q:
         now = q.popleft()
