@@ -15,8 +15,12 @@ def solution():
         a_rep = find(a)
         b_rep = find(b)
 
-        if a_rep != b_rep:
+        if a_rep == b_rep:
+            return
+        elif a_rep > b_rep:
             set_list[b_rep] = a_rep
+        else:
+            set_list[a_rep] = b_rep
 
     N, M = map(int, input().split())
     set_list = [i for i in range(N + 1)]
@@ -30,11 +34,10 @@ def solution():
         for i in range(1, party[0]):
             union(party[i], party[i + 1])
 
-    true_set = set_list[true_people[-1]]
     ans = 0
     for party in parties:
-        if find(party[1]) == find(true_set):
-            union(party[1], true_set)
+        if find(party[-1]) == find(true_people[-1]):
+            union(party[-1], true_people[-1])
         else:
             ans += 1
 
