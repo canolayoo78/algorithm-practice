@@ -4,33 +4,30 @@ import sys
 input = sys.stdin.readline
 INF = sys.maxsize
 
-V, E = map(int, input().split())
 
-start = int(input())
-distance = [INF] * (V + 1)
-graph = [[] for _ in range(V + 1)]
-for _ in range(E):
-    u, v, w = map(int, input().split())
-    graph[u].append((v, w))
+def solution():
+    V, E = map(int, input().split())
+    start = int(input())
+    distance = [INF] * (V + 1)
+    graph = [[] for _ in range(V + 1)]
 
+    for _ in range(E):
+        u, v, w = map(int, input().split())
+        graph[u].append((w, v))
 
-def solution(start):
     q = []
     heapq.heappush(q, (0, start))
     distance[start] = 0
 
     while q:
-        dist, now = heapq.heappop(q)
-        if distance[now] < dist:
+        d, now = heapq.heappop(q)
+        if distance[now] < d:
             continue
-        for i in graph[now]:
-            cost = dist + i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+        for d, next in graph[now]:
+            if distance[next] > distance[now] + d:
+                distance[next] = distance[now] + d
+                heapq.heappush(q, (distance[now] + d, next))
 
-
-def print_answer():
     for i in range(1, V + 1):
         if distance[i] == INF:
             print("INF")
@@ -39,5 +36,4 @@ def print_answer():
 
 
 if __name__ == "__main__":
-    solution(start)
-    print_answer()
+    solution()
