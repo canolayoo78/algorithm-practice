@@ -26,11 +26,13 @@ def solution():
                 distance[next].sort()
                 heapq.heappush(q, (cost + next_cost, next))
 
+    ans = []
     for i in range(1, n + 1):
         if distance[i][k - 1] == INF:
-            print(-1)
+            ans.append("-1")
         else:
-            print(distance[i][k - 1])
+            ans.append(str(distance[i][k - 1]))
+    print("\n".join(ans))
 
 
 if __name__ == "__main__":
