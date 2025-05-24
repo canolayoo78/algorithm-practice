@@ -22,13 +22,9 @@ def solution():
         if distances[start] != INF and distances[end] > distances[start] + weight:
             print(-1)
             return
-
+        
     for i in range(2, n + 1):
-        if distances[i] == INF:
-            print(-1)
-        else:
-            print(distances[i])
-
+        print(distances[i] if distances[i] != INF else -1)
 
 if __name__ == "__main__":
     solution()
