@@ -8,9 +8,7 @@ INF = sys.maxsize
 def solution():
     n = int(input())
     m = int(input())
-    distances = [[INF for _ in range(n + 1)] for _ in range(n + 1)]
-    for i in range(1, n + 1):
-        distances[i][i] = 0
+    distances = [[INF if a != b else 0 for b in range(n + 1)] for a in range(n + 1)]
     for _ in range(m):
         a, b, c = map(int, input().split())
         distances[a][b] = min(distances[a][b], c)
