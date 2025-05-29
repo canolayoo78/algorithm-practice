@@ -25,7 +25,6 @@ def solution():
 
     v, e = map(int, input().split())
     edges = []
-    ans = []
     rep = [i for i in range(v + 1)]
     for _ in range(e):
         start, end, weight = map(int, input().split())
@@ -33,13 +32,16 @@ def solution():
     edges.sort(key=lambda x: x[2])
     
     i = 0
-    while len(ans) < v - 1:
+    used_edges = 0
+    ans = 0
+    while used_edges < v - 1:
         start, end, weight = edges[i]
         if find(start) != find(end):
             union(start, end)
-            ans.append(weight)
+            ans += weight
+            used_edges += 1
         i += 1
-    print(sum(ans))
+    print(ans)
 
 
 if __name__ == "__main__":
