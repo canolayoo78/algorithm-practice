@@ -1,4 +1,3 @@
-import heapq
 import sys
 
 sys.setrecursionlimit(10**6)
@@ -26,17 +25,20 @@ def solution():
 
     v, e = map(int, input().split())
     edges = []
+    ans = []
     rep = [i for i in range(v + 1)]
     for _ in range(e):
         start, end, weight = map(int, input().split())
-        heapq.heappush(edges, (weight, start, end))
-
-    ans = []
+        edges.append((start, end, weight))
+    edges.sort(key=lambda x: x[2])
+    
+    i = 0
     while len(ans) < v - 1:
-        weight, start, end = heapq.heappop(edges)
+        start, end, weight = edges[i]
         if find(start) != find(end):
             union(start, end)
             ans.append(weight)
+        i += 1
     print(sum(ans))
 
 
