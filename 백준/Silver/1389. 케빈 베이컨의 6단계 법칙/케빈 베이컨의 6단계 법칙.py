@@ -1,34 +1,44 @@
 import sys
+from collections import deque
 
+sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 write = sys.stdout.write
 INF = sys.maxsize
 
 
 def solution():
+    def bfs(start):
+        q = deque([(start, 0)])
+        visited = [0] * (n + 1)
+        distance = 0
+        while q:
+            now, dist = q.popleft()
+            visited[now] = 1
+            distance += dist
+            for next in graph[now]:
+                if not visited[next]:
+                    q.append((next, dist + 1))
+                    visited[next] = 1
+        return distance
+
     n, m = map(int, input().split())
-    distances = [[INF if a != b else 0 for b in range(n)] for a in range(n)]
+    graph = [[] for _ in range(n + 1)]
+
     for _ in range(m):
-        start, end = map(int, input().split())
-        distances[start - 1][end - 1] = 1
-        distances[end - 1][start - 1] = 1
+        a, b = map(int, input().split())
+        graph[a].append(b)
+        graph[b].append(a)
 
-    for k in range(n):
-        for start in range(n):
-            for end in range(n):
-                distances[start][end] = min(
-                    distances[start][end], distances[start][k] + distances[k][end]
-                )
-
-    min_sum = INF
     min_index = 0
-    for i in range(n):
-        now_sum = sum(distances[i])
+    min_sum = INF
+    for i in range(1, n + 1):
+        now_sum = bfs(i)
         if now_sum < min_sum:
             min_index = i
             min_sum = now_sum
 
-    write(str(min_index + 1))
+    write(str(min_index))
 
 
 if __name__ == "__main__":
