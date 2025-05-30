@@ -2,27 +2,30 @@ import sys
 
 sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
-
-N = int(input())
-graph = [[] for _ in range(N + 1)]
-visited = [0] * (N + 1)
-ans = [0] * (N + 1)
-
-for _ in range(N - 1):
-    start, end = map(int, input().split())
-    graph[start].append(end)
-    graph[end].append(start)
+write = sys.stdout.write
 
 
-def dfs(start):
-    visited[start] = 1
+def solution():
+    def dfs(now):
+        visited[now] = True
+        for next in graph[now]:
+            if not visited[next]:
+                ans[next] = now
+                dfs(next)
 
-    for next_node in graph[start]:
-        if not visited[next_node]:
-            ans[next_node] = start
-            dfs(next_node)
+    n = int(input())
+    graph = [[] for _ in range(n + 1)]
+    visited = [0] * (n + 1)
+    ans = [0] * (n + 1)
+    for _ in range(n - 1):
+        parent, child = map(int, input().split())
+        graph[parent].append(child)
+        graph[child].append(parent)
+
+    dfs(1)
+
+    write("\n".join(str(a) for a in ans[2:]))
 
 
 if __name__ == "__main__":
-    dfs(1)
-    print("\n".join(str(answer) for answer in ans[2:]))
+    solution()
