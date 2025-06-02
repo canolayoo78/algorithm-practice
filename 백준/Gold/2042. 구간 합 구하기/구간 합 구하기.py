@@ -1,12 +1,15 @@
 import sys
 
-sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
-write = sys.stdout.write
-INF = sys.maxsize
 
 
 def solution():
+    def init_tree():
+        for i in range(N):
+            segment_tree[n + i] = int(input())
+        for i in range(n - 1, 0, -1):
+            segment_tree[i] = segment_tree[2 * i] + segment_tree[2 * i + 1]
+
     def update_tree(i):
         while i > 1:
             if i % 2 == 0:
@@ -37,11 +40,7 @@ def solution():
     while N > n:
         n *= 2
     segment_tree = [0] * (2 * n)
-    for i in range(N):
-        segment_tree[n + i] = int(input())
-
-    for i in range(n - 1, 0, -1):
-        segment_tree[i] = segment_tree[2 * i] + segment_tree[2 * i + 1]
+    init_tree()
 
     for _ in range(M + K):
         a, b, c = map(int, input().split())
