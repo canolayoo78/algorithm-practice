@@ -1,15 +1,12 @@
-import re
 import sys
 
 input = sys.stdin.readline
 write = sys.stdout.write
 
-
 def solution():
     string = input().strip()
 
-    parts = re.split(r"D2|d2", string)
-    if len(parts) > 1:
+    if "d2" in string or "D2" in string:
         write("D2")
     else:
         write("unrated")
