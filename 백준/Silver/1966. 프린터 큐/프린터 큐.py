@@ -1,8 +1,6 @@
 import sys
-from collections import deque
 
 input = sys.stdin.readline
-INF = sys.maxsize
 
 
 def solution():
