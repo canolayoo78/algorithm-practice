@@ -1,29 +1,21 @@
 import sys
-from collections import deque
 
 input = sys.stdin.readline
+write = sys.stdout.write
 
 
 def solution():
     N = int(input())
-
     numbers = list(map(int, input().split()))
-    queue = deque()
-    answer = [0] * N
+    nge = [-1] * N
+    stack = [0]
 
-    for i in range(N):
+    for i in range(1, N):
+        while stack and numbers[stack[-1]] < numbers[i]:
+            nge[stack.pop()] = numbers[i]
+        stack.append(i)
 
-        while queue and numbers[queue[-1]] < numbers[i]:
-            index = queue.pop()
-            answer[index] = numbers[i]
-
-        queue.append(i)
-
-    while queue:
-        index = queue.pop()
-        answer[index] = -1
-
-    print(" ".join(str(a) for a in answer))
+    write(" ".join(str(n) for n in nge))
 
 
 if __name__ == "__main__":
