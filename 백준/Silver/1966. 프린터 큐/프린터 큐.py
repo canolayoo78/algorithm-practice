@@ -7,31 +7,25 @@ INF = sys.maxsize
 
 def solution():
     T = int(input())
-    while T > 0:
+
+    for _ in range(T):
         N, M = map(int, input().split())
         documents = list(map(int, input().split()))
-        out_stream = deque()
+        out_stream = [(i, documents[i]) for i in range(N)]
+        documents.sort(reverse=True)
 
-        for i in range(N):
-            out_stream.append((i, documents[i]))
+        index = 0
+        order = 0
 
-        importance = deque(sorted(documents, reverse=True))
-        order = 1
-        while out_stream:
-            now_index, now_importance = out_stream.popleft()
-
-            if now_importance == importance[0]:
-                if now_index == M:
-                    print(order)
+        while True:
+            if out_stream[index][1] == documents[order]:
+                if out_stream[index][0] == M:
+                    print(order + 1)
                     break
-                else:
-                    order += 1
-                    importance.popleft()
-
+                order += 1
             else:
-                out_stream.append((now_index, now_importance))
-
-        T -= 1
+                out_stream.append((out_stream[index]))
+            index += 1
 
 
 if __name__ == "__main__":
