@@ -1,5 +1,5 @@
-import heapq
 import sys
+from collections import defaultdict
 
 input = sys.stdin.readline
 write = sys.stdout.write
@@ -7,29 +7,29 @@ INF = sys.maxsize
 
 
 def solution():
-    N, P = map(int, input().split())
-    pushes = {}
+    N, _ = map(int, input().split())
+    stacks = defaultdict(list)
+    moves = 0
 
-    ans = 0
+    def press(line, fret):
+        nonlocal moves
+        s = stacks[line]
+
+        while s and s[-1] > fret:
+            s.pop()
+            moves += 1
+
+        if s and s[-1] == fret:
+            return
+
+        s.append(fret)
+        moves += 1
+
     for _ in range(N):
         line, fret = map(int, input().split())
-        if line in pushes:
-            if pushes[line][0] > -fret:
-                heapq.heappush(pushes[line], -fret)
-                ans += 1
-            else:
-                while pushes[line] and pushes[line][0] < -fret:
-                    heapq.heappop(pushes[line])
-                    ans += 1
-                if pushes[line] and pushes[line][0] != -fret or not pushes[line]:
-                    heapq.heappush(pushes[line], -fret)
-                    ans += 1
-        else:
-            pushes[line] = [-fret]
-            heapq.heapify(pushes[line])
-            ans += 1
+        press(line, fret)
 
-    print(ans)
+    print(moves)
 
 
 if __name__ == "__main__":
