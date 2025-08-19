@@ -1,9 +1,4 @@
 import sys
-from collections import deque
-
-input = sys.stdin.readline
-write = sys.stdout.write
-
 
 def solution():
     length = int(input())
@@ -12,10 +7,6 @@ def solution():
     result = []
 
     def make_tree(start, end, root):
-        # print("start:", start, "end:", end, "root:", root)
-        # print("list to sort:", inorder[start : end + 1])
-        # print("root_num:", preorder[root])
-
         if start > end:
             return None
         for i in range(start, end + 1):
