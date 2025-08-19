@@ -1,5 +1,8 @@
 import sys
 
+input = sys.stdin.readline
+write = sys.stdout.write
+
 def solution():
     length = int(input())
     preorder = list(map(int, input().split()))
@@ -19,7 +22,8 @@ def solution():
         result.append(preorder[root])
 
     make_tree(0, length - 1, 0)
-    print(*result)
+    write(" ".join(str(r) for r in result))
+    write("\n")
 
 
 if __name__ == "__main__":
