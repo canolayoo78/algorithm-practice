@@ -3,8 +3,6 @@ from collections import defaultdict
 
 input = sys.stdin.readline
 write = sys.stdout.write
-read = sys.stdin.buffer.read
-sys.setrecursionlimit(10**6)
 
 
 def solution():
