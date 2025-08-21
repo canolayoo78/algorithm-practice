@@ -1,5 +1,4 @@
 import sys
-from collections import deque
 
 input = sys.stdin.readline
 write = sys.stdout.write
@@ -7,12 +6,13 @@ write = sys.stdout.write
 
 def solution():
     N, K = map(int, input().split())
-    q = deque([i for i in range(1, N + 1)])
+    array = list(range(1, N + 1))
     result = []
-    while q:
-        for _ in range(K - 1):
-            q.append(q.popleft())
-        result.append(q.popleft())
+    index = 0
+    while array:
+        index += K - 1
+        index %= len(array)
+        result.append(array.pop(index))
     write("<")
     write(", ".join(str(r) for r in result))
     write(">")
