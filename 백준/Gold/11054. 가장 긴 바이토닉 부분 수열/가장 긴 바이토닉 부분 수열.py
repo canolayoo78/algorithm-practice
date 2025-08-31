@@ -15,19 +15,17 @@ def solution():
         pos = bisect.bisect_left(increase_tails, num[i])
         if pos == len(increase_tails):
             increase_tails.append(num[i])
-            L[i] = len(increase_tails)
         else:
             increase_tails[pos] = num[i]
-            L[i] = len(increase_tails)
+        L[i] = len(increase_tails)
 
     for i in range(N - 1, -1, -1):
         pos = bisect.bisect_left(decrease_tails, num[i])
         if pos == len(decrease_tails):
             decrease_tails.append(num[i])
-            R[i] = len(decrease_tails)
         else:
             decrease_tails[pos] = num[i]
-            R[i] = len(decrease_tails)
+        R[i] = len(decrease_tails)
 
     ans = 0
     for i in range(N):
