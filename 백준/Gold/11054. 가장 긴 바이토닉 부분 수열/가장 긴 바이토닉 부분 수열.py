@@ -1,29 +1,37 @@
-
+import bisect
 import sys
-
 input = sys.stdin.readline
 
 
 def solution():
     N = int(input())
     num = list(map(int, input().split()))
-    dp_increase = [1] * N
-    dp_decrease = [1] * N
+    increase_tails = []
+    decrease_tails = []
+    L = [1] * (N + 1)
+    R = [1] * (N + 1)
 
-    for i in range(1, N):
-        for j in range(i):
-            if num[i] > num[j]:
-                dp_increase[i] = max(dp_increase[i], dp_increase[j] + 1)
+    for i in range(N):
+        pos = bisect.bisect_left(increase_tails, num[i])
+        if pos == len(increase_tails):
+            increase_tails.append(num[i])
+            L[i] = len(increase_tails)
+        else:
+            increase_tails[pos] = num[i]
+            L[i] = len(increase_tails)
 
-    for i in range(N - 2, -1, -1):
-        for j in range(N - 1, i, -1):
-            if num[i] > num[j]:
-                dp_decrease[i] = max(dp_decrease[i], dp_decrease[j] + 1)
+    for i in range(N - 1, -1, -1):
+        pos = bisect.bisect_left(decrease_tails, num[i])
+        if pos == len(decrease_tails):
+            decrease_tails.append(num[i])
+            R[i] = len(decrease_tails)
+        else:
+            decrease_tails[pos] = num[i]
+            R[i] = len(decrease_tails)
 
     ans = 0
-    for x, y in zip(dp_increase, dp_decrease):
-        ans = max(ans, x + y - 1)
-
+    for i in range(N):
+        ans = max(ans, L[i] + R[i] - 1)
     print(ans)
 
 
