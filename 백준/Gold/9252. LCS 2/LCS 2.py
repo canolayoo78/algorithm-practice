@@ -1,5 +1,4 @@
 import sys 
-import heapq
 
 input = sys.stdin.readline 
 write = sys.stdout.write 
@@ -36,8 +35,8 @@ def solution():
             i -= 1
         else:
             j -= 1
-    print(dp[-1][-1])
-    print(ans)
+    write(str(dp[-1][-1]))
+    write(ans)
     
 if __name__ == "__main__":
     solution()
