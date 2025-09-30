@@ -1,6 +1,7 @@
 import sys 
 
 input = sys.stdin.readline 
+write = sys.stdout.write 
 INF = sys.maxsize
 
 def solution():
@@ -23,7 +24,7 @@ def solution():
         else:
             right -= 1
             
-    print(features[min_index[0]], features[min_index[1]])
+    write(str(features[min_index[0]])+" "+str(features[min_index[1]]))
             
     
     
