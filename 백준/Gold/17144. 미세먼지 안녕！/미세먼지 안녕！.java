@@ -35,7 +35,6 @@ public class Main {
             }
         }
 
-
         while(T-- > 0) {
             oneSecondAfter();
         }
@@ -88,7 +87,6 @@ public class Main {
     static void circulate(boolean up){
         int[][] d;
         int h, r;
-        int c = 0;
         int w = C;
         int dir = 0;
 
@@ -104,44 +102,33 @@ public class Main {
         }
 
         int prev = 0;
-        int now;
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < w - 1; j++) {
-                int nr = r + d[dir][0];
-                int nc = c + d[dir][1];
-                now = map[nr][nc];
-                map[nr][nc] = prev;
+        int [] state = {r, 0, prev};
+        int [] steps = {w - 1, h - 1, w - 1, h - 2};
 
-                r = nr;
-                c = nc;
-                prev = now;
-            }
-            dir++;
-            for (int j = 0; j < h - 1; j++) {
-                int nr = r + d[dir][0];
-                int nc = c + d[dir][1];
-                now = map[nr][nc];
-                map[nr][nc] = prev;
-
-                r = nr;
-                c = nc;
-                prev = now;
-            }
-            dir++;
+        for (int i = 0; i < 4; i++) {
+            state = move(d, dir, steps[i], state);
+            dir = (dir + 1) % 4;
         }
         map[cir1][0] = -1;
         map[cir2][0] = -1;
     }
 
-    static void printMap() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < R; i++) {
-            for (int j = 0; j < C; j++) {
-                sb.append(map[i][j] + " ");
-            }
-            sb.append("\n");
+    static int[] move(int[][] d, int dir, int steps, int[] state) {
+        int r = state[0]; int c = state[1]; int prev = state[2];
+
+        for (int k = 0; k < steps; k++) {
+            int nr = r + d[dir][0];
+            int nc = c + d[dir][1];
+
+            int now = map[nr][nc];
+            map[nr][nc] = prev;
+
+            r = nr;
+            c = nc;
+            prev = now;
         }
-        System.out.println(sb.toString());
+
+        return new int[]{r, c, prev};
     }
 
     static int sumOfAll(){
