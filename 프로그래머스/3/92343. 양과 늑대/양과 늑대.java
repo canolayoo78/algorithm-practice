@@ -19,47 +19,34 @@ class Solution {
             int u = edge[1];
             
             graph[v].add(u);
-            graph[u].add(v);
         }
         
-        Set<Integer> visited = new HashSet<>();
-        visited.add(0);
         Set<Integer> candidates = new HashSet<>();
-        dfs(0, 1, 0, visited, candidates);
+        dfs(0, 1, 0, candidates);
         return maxSheep;
     }
     
-    public void dfs(int now, int sheep, int wolf, Set<Integer> visited, Set<Integer> candidates){
+    public void dfs(int now, int sheep, int wolf, Set<Integer> candidates){
         maxSheep = Math.max(maxSheep, sheep);
         
-        // 지금 위치의 자식들을 후보에 추가
-        Set<Integer> updatedC = new HashSet<>(candidates);
         for(int next: graph[now]){
-            updatedC.add(next);
+            candidates.add(next);
         }
         
         // 후보들에 대해서
-        for(int cand: updatedC){
-            // 다음 노드가 방문한 적 있는 곳이면 건너뛰기
-            if (visited.contains(cand)){
-                continue;
+        for(int cand: candidates){
+            // 이번에 가는 곳은 후보에서 빼고 진입
+            Set<Integer> nextC = new HashSet<>(candidates);
+            nextC.remove(cand);
+
+            // 양이면 이동
+            if (info[cand] == 0){
+                dfs(cand, sheep + 1, wolf, nextC);
             }
-            
-            // 다음 노드가 방문한 적 없는 곳이면
-            else{
-                // 방문하기 위해 방문지 업데이트 하자
-                Set<Integer> updatedV = new HashSet<>(visited);
-                updatedV.add(cand);
-                
-                // 양이면 이동
-                if (info[cand] == 0){
-                    dfs(cand, sheep + 1, wolf, updatedV, updatedC);
-                }
-                // 늑대면 개수 보고 이동
-                else {
-                    if (sheep > wolf + 1){
-                        dfs(cand, sheep, wolf + 1, updatedV, updatedC);
-                    }
+            // 늑대면 개수 보고 이동
+            else {
+                if (sheep > wolf + 1){
+                    dfs(cand, sheep, wolf + 1, nextC);
                 }
             }
         }
